@@ -330,7 +330,7 @@ const typeFn = (() => {
         return {}.toString.call(obj) == '[object ' + item + ']'
       }
     })
-  console.log('utils: ', utils)
+  // console.log('utils: ', utils)
   return { ...utils }
 })()
 

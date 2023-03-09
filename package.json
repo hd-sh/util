@@ -1,6 +1,6 @@
 {
   "name": "@hd-sh/util",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "util",
   "main": "core.js",
   "scripts": {
