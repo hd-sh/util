@@ -173,60 +173,57 @@ export const phoneDesensitize = formatPhoneDisplay
 export const sum = (() => {
   return (a, b) => a + b
 })()
+
 // 节流函数
-export const throttle = (() => {
-  let startTime = null
-  return (time, callback) =>
-    new Promise((resolve, reject) => {
-      let nowTime = new Date().getTime()
-      if (!startTime || nowTime - startTime > time) {
-        startTime = nowTime
-        callback && callback instanceof Function && callback()
-        resolve()
-        // callback&&callback()
-      }
-    })
-})()
+export function throttle(func, wait) {
+  var timer = null
+  var startTime = Date.now()
 
-// 防抖函数
-export const stabilization = (() => {
-  let timer = null
-  return (time, callback) => {
-    return new Promise((resolve, reject) => {
-      window.clearTimeout(timer)
-      timer = setTimeout(() => {
-        callback && callback instanceof Function && callback()
-        resolve()
-      }, time)
-    })
-  }
-})()
-
-/**
- * @desc 函数防抖
- * @param func 函数
- * @param wait 延迟执行毫秒数
- * @param immediate true 表立即执行，false 表非立即执行
- */
-export const debounce = (func, wait, immediate) => {
-  let timeout
   return function () {
-    const context = this
-    const args = [...arguments]
-    if (timeout) clearTimeout(timeout)
-    if (immediate) {
-      const callNow = !timeout
-      timeout = setTimeout(() => {
-        timeout = null
-      }, wait)
-      if (callNow) func.apply(context, args)
+    var curTime = Date.now()
+    var remaining = wait - (curTime - startTime)
+    var context = this
+    var args = arguments
+
+    clearTimeout(timer)
+
+    if (remaining <= 0) {
+      func.apply(context, args)
+
+      startTime = Date.now()
     } else {
-      timeout = setTimeout(() => {
-        func.apply(context, args)
-      }, wait)
+      timer = setTimeout(func, remaining) // 如果小于wait 保证在差值时间后执行
     }
   }
 }
+
+// 防抖函数
+export function debounce(func, wait, immediate) {
+  var timeout, result
+  function debounced() {
+    var context = this,
+      args = arguments
+    if (timeout) clearTimeout(timeout)
+    if (immediate) {
+      var callNow = !timeout
+      timeout = setTimeout(function () {
+        result = func.apply(context, args)
+      }, wait)
+      if (callNow) result = func.apply(context, args)
+    } else {
+      timeout = setTimeout(function () {
+        result = func.apply(context, args)
+      }, wait)
+    }
+    return result
+  }
+  debounced.cancel = function () {
+    cleatTimeout(timeout)
+    timeout = null
+  }
+  return debounced
+}
+
 /**
  * 判断空数组
  * @param {Array} array 需要判断的数组
@@ -320,7 +317,43 @@ const validators = {
   isEmptyObject,
   isEmptyValue,
 }
+// url params
+export const getURLParams = (search) => {
+  search = search || location.search
 
+  const list = search.split('?')
+
+  if (isEmptyArray(list) && list.length > 1) {
+    const item = list[1]
+    let items = item.split('&')
+
+    if (isEmptyArray(items)) {
+      items = []
+    }
+
+    const newParams = {}
+
+    items.map((rs) => {
+      const param = rs.split('=')
+
+      if (isEmptyArray(param)) {
+        let key = ''
+        let value = ''
+
+        if (param.length === 1) {
+          key = param[0]
+        } else if (param.length === 2) {
+          key = param[0]
+          value = param[1]
+        }
+        key && value && (newParams[key] = value)
+      }
+    })
+    return newParams
+  } else {
+    return {}
+  }
+}
 const typeFn = (() => {
   var utils = {}
   'Boolean|Number|String|Function|Array|Date|RegExp|Object|Error'
@@ -363,7 +396,6 @@ export default {
   formatPhoneDisplay,
   phoneDesensitize,
   throttle,
-  stabilization,
   debounce,
   copyText,
   generateUuid,
@@ -378,4 +410,5 @@ export default {
   typeFn,
   sum,
   getStyle,
+  getURLParams,
 }
