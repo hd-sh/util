@@ -49,4 +49,12 @@ getStyle('dom','xx')
   typeFn,
   sum,
   getStyle,
+  getURLParams,
+  formatSearchValue,
+  getElementOffset,
+  getStorageData,
+  setStorageData,
+  getSessionData,
+  setSessionData,
+
 ```

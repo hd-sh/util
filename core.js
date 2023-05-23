@@ -1,3 +1,4 @@
+import { getStorageData, setStorageData, getSessionData, setSessionData } from './storage.js'
 /**
  * 生成唯一uuid，可以指定长度和基数
  * @param {number} len 长度，默认36
@@ -382,6 +383,52 @@ const getStyle = (ele, attr) => {
   }
   return attr ? style[attr] : style
 }
+// 过滤查询参数
+/**
+ *
+ * @param {*} values
+ * @param {*} ignoreValue 忽略的值（移除值为xx的健值对）
+ * @returns
+ */
+export const formatSearchValue = (values, ignoreValue) => {
+  for (const key in values) {
+    if (values[key] === '' || values[key] === null || values[key] === undefined) {
+      delete values[key]
+    }
+    if (typeof values[key] === 'string' && values[key].trim() === '') {
+      delete values[key]
+    }
+    if (ignoreValue !== undefined && values[key] === ignoreValue) {
+      delete values[key]
+    }
+    if (typeof values[key] === 'string') {
+      values[key] = values[key].trim()
+    }
+  }
+  return values
+}
+// 获取元素的偏移量
+export function getElementOffset(eln) {
+  let parObj = eln
+  if (!parObj) {
+    return
+  }
+  const width = parObj.offsetWidth
+  const height = parObj.offsetHeight
+  let top = parObj.offsetTop
+  let left = parObj.offsetLeft
+  while ((parObj = parObj.offsetParent)) {
+    const { offsetTop, offsetLeft } = parObj
+    top += offsetTop
+    left += offsetLeft
+  }
+  return {
+    top,
+    left,
+    width,
+    height,
+  }
+}
 
 export default {
   isIOS,
@@ -411,4 +458,10 @@ export default {
   sum,
   getStyle,
   getURLParams,
+  formatSearchValue,
+  getElementOffset,
+  getStorageData,
+  setStorageData,
+  getSessionData,
+  setSessionData,
 }

@@ -25,3 +25,8 @@ window.addEventListener(
 // console.log(Util.isEmptyArray([1]), Util.isEmptyValue(undefined), Util.isGeneratorFunction(gen))
 // console.log(Util.typeFn.isArray([]))
 // console.log(Util.getStyle(document.getElementById('app'), 'width'))
+
+// console.log(Util.formatSearchValue({ a: 1, b: '', c: 'xx' }, 1))
+// console.log(Util.getElementOffset(document.getElementById('app')))
+// Util.setStorageData('a', { a: 1, b: '', c: 'xx' })
+// console.log(Util.getStorageData('a'))
