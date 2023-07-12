@@ -1,4 +1,8 @@
-export { default as dom } from './dom'
-export { default as storage } from './storage'
-export { default as tool } from './tool'
-export { default as validate } from './validate'
+import Util from './utils/index'
+export default Util
+
+export * from './utils/dom'
+export * from './utils/storage'
+export * from './utils/tool'
+export * from './utils/validate'
+export * from './utils/test'

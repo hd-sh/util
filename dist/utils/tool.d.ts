@@ -3,7 +3,7 @@
  * @param {number} len 长度，默认36
  * @param {number} radix 基数，如2，8，10，16等
  */
-export declare const generateUuid: (len?: number, radix?: number) => string;
+export declare function generateUuid(len: number, radix?: number): string;
 export declare const isIOS: boolean;
 export declare const isAndroid: boolean;
 export declare const isIE: boolean;
@@ -38,7 +38,7 @@ export declare const typeFn: {
     [x: string]: (obj: any) => boolean;
 };
 declare const _default: {
-    generateUuid: (len?: number | undefined, radix?: number | undefined) => string;
+    generateUuid: typeof generateUuid;
     isIOS: boolean;
     isAndroid: boolean;
     isIE: boolean;

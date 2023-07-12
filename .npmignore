@@ -1,6 +1,2 @@
-# 排除 lib文件
-src/
-example/
-test/
-# 排除 node_modules文件
-node_modules/
+/src/
+/node_modules/

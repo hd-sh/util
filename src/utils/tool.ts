@@ -3,26 +3,34 @@
  * @param {number} len 长度，默认36
  * @param {number} radix 基数，如2，8，10，16等
  */
-export const generateUuid = (len?: number, radix?: number) => {
+export function generateUuid(len: number, radix?: number): string {
   var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('')
-  var uuid = [],
-    i
+  var uuid: string[] = []
+  var i: number
+
   radix = radix || chars.length
+
   if (len) {
-    for (i = 0; i < len; i++) uuid[i] = chars[0 | (Math.random() * radix)]
+    for (i = 0; i < len; i++) {
+      uuid[i] = chars[Math.floor(Math.random() * radix)]
+    }
   } else {
-    var r
+    var r: number
+
     uuid[8] = uuid[13] = uuid[18] = uuid[23] = '-'
     uuid[14] = '4'
+
     for (i = 0; i < 36; i++) {
       if (!uuid[i]) {
         r = 0 | (Math.random() * 16)
-        uuid[i] = chars[i == 19 ? (r & 0x3) | 0x8 : r]
+        uuid[i] = chars[i === 19 ? (r & 0x3) | 0x8 : r]
       }
     }
   }
+
   return uuid.join('')
 }
+
 export const isIOS: boolean = (function () {
   const u = window.navigator.userAgent
   const ios = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)
@@ -88,18 +96,24 @@ export const generateRange = (length: number): Array<number> => {
  */
 export const makeCancelablePromise = <T>(
   promise: Promise<T>
-): Promise<T> & { cancel: () => void } => {
+): Promise<T> & {
+  cancel: () => void
+} => {
   let rejectFn: (reason?: any) => void
 
   const wrappedPromise = new Promise<T>((resolve, reject) => {
     rejectFn = reject
 
     Promise.resolve(promise).then(resolve).catch(reject)
-  }) as Promise<T> & { cancel: () => void }
+  }) as Promise<T> & {
+    cancel: () => void
+  }
 
   wrappedPromise.cancel = () => {
     ;(promise as any).__canceled = true
-    rejectFn({ canceled: true })
+    rejectFn({
+      canceled: true,
+    })
   }
 
   return wrappedPromise
@@ -187,7 +201,9 @@ export const typeFn = (() => {
       }
     })
 
-  return { ...utils }
+  return {
+    ...utils,
+  }
 })()
 
 export default {
