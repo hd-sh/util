@@ -26,3 +26,10 @@ export declare const getSessionData: (fieldName: string, needParse?: boolean) =>
  * @param {boolean} needStringify 是否需要对存储的数据进行JSON字符串化，默认为true
  */
 export declare const setSessionData: (fieldName: string, fieldValue: any, needStringify?: boolean) => any;
+declare const _default: {
+    getStorageData: (fieldName: string, needParse?: boolean) => any;
+    setStorageData: (fieldName: string, fieldValue: any, needStringify?: boolean) => any;
+    getSessionData: (fieldName: string, needParse?: boolean) => any;
+    setSessionData: (fieldName: string, fieldValue: any, needStringify?: boolean) => any;
+};
+export default _default;

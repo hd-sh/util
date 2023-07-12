@@ -32,7 +32,21 @@ export declare const generateRange: (length: number) => Array<number>;
 export declare const makeCancelablePromise: <T>(promise: Promise<T>) => Promise<T> & {
     cancel: () => void;
 };
+export declare function throttle(func: () => void, delay: number): () => void;
 export declare function debounce(func: (...args: any[]) => any, wait: number, immediate?: boolean): (...args: any[]) => any;
 export declare const typeFn: {
     [x: string]: (obj: any) => boolean;
 };
+declare const _default: {
+    generateUuid: (len?: number | undefined, radix?: number | undefined) => string;
+    isIOS: boolean;
+    isAndroid: boolean;
+    isIE: boolean;
+    copyText: (text: string) => boolean;
+    throttle: typeof throttle;
+    debounce: typeof debounce;
+    typeFn: {
+        [x: string]: (obj: any) => boolean;
+    };
+};
+export default _default;

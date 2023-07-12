@@ -48,7 +48,7 @@ export const sum: (a: number, b: number) => number = (() => {
  * @returns {boolean}
  */
 
-const isEmptyArray = (array: any[]): boolean => {
+export const isEmptyArray = (array: any[]): boolean => {
   return !Array.isArray(array) || array.length === 0
 }
 
@@ -57,7 +57,7 @@ const isEmptyArray = (array: any[]): boolean => {
  * @param {Object} object 需要判断的对象
  * @returns {boolean}
  */
-const isEmptyObject = (object: object): boolean => {
+export const isEmptyObject = (object: object): boolean => {
   let empty = false
 
   if (!(object instanceof Object)) {
@@ -69,7 +69,7 @@ const isEmptyObject = (object: object): boolean => {
   return empty
 }
 
-const isEmptyValue = (value: any): boolean => {
+export const isEmptyValue = (value: any): boolean => {
   return value == null || value === ''
 }
 
@@ -78,19 +78,19 @@ const isEmptyValue = (value: any): boolean => {
  * @param {Function} fn
  * @returns {Boolean}
  */
-const isGeneratorFunction = (fn: any): boolean => {
+export const isGeneratorFunction = (fn: any): boolean => {
   return fn && Object.prototype.toString.call(fn) === '[object GeneratorFunction]'
 }
 
-const isNotNumber = (value: any): boolean => {
+export const isNotNumber = (value: any): boolean => {
   return isEmptyValue(value) || isNaN(value)
 }
 
-const noopValidator = (rule: any, value: any, callback: () => void): void => {
+export const noopValidator = (rule: any, value: any, callback: () => void): void => {
   callback()
 }
 
-const patterns = {
+export const patterns = {
   integer: /^[1-9]\d*$/, // 整数
   nonNegativeInteger: /^(0|[1-9]\d*)$/, // 非负整数
   limitedInteger: /^[1-9]\d{0,7}$/, // 有限整数
@@ -99,7 +99,7 @@ const patterns = {
   invalidCash: /\..{3}/,
 }
 
-const validators = {
+export const validators = {
   isPatternMatch: (value: any, pattern: RegExp): boolean => {
     if (!value) {
       return true
@@ -178,4 +178,19 @@ export const getURLParams = (search?: string): Record<string, string> => {
   } else {
     return {}
   }
+}
+export default {
+  formatRequestData,
+  getURLParams,
+  formatPhoneDisplay,
+  phoneDesensitize,
+  sum,
+  isEmptyArray,
+  isEmptyObject,
+  isEmptyValue,
+  isGeneratorFunction,
+  isNotNumber,
+  noopValidator,
+  patterns,
+  validators,
 }

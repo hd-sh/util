@@ -106,7 +106,7 @@ export const makeCancelablePromise = <T>(
 }
 
 // 节流函数
-function throttle(func: () => void, delay: number): () => void {
+export function throttle(func: () => void, delay: number): () => void {
   let timeout: NodeJS.Timeout | null = null
   let lastExecTime = 0
 
@@ -189,3 +189,14 @@ export const typeFn = (() => {
 
   return { ...utils }
 })()
+
+export default {
+  generateUuid,
+  isIOS,
+  isAndroid,
+  isIE,
+  copyText,
+  throttle,
+  debounce,
+  typeFn,
+}

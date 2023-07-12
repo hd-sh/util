@@ -35,7 +35,7 @@ export const importScript = (
  * @param {*} attr
  * @returns
  */
-function getStyle(ele: HTMLElement, attr: string): string | null {
+export function getStyle(ele: HTMLElement, attr: string): string | null {
   const style = window.getComputedStyle(ele)
   return style ? style.getPropertyValue(attr) : null
 }
@@ -91,4 +91,10 @@ export function getElementOffset(
     width,
     height,
   }
+}
+export default {
+  importScript,
+  getStyle,
+  formatSearchValue,
+  getElementOffset,
 }

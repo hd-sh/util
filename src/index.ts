@@ -1,4 +1,4 @@
-export * from './dom'
-export * from './storage'
-export * from './tool'
-export * from './validate'
+export { default as dom } from './dom'
+export { default as storage } from './storage'
+export { default as tool } from './tool'
+export { default as validate } from './validate'

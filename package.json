@@ -1,6 +1,6 @@
 {
   "name": "@hd-sh/util",
-  "version": "0.0.9",
+  "version": "1.0.0",
   "description": "util",
   "type": "module",
   "main": "./dist/index.cjs.js",

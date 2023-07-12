@@ -41,3 +41,10 @@ export const getSessionData = (fieldName: string, needParse = true): any => {
 export const setSessionData = (fieldName: string, fieldValue: any, needStringify = true): any => {
   sessionStorage.setItem(fieldName, needStringify ? JSON.stringify(fieldValue) : fieldValue)
 }
+
+export default {
+  getStorageData,
+  setStorageData,
+  getSessionData,
+  setSessionData,
+}
